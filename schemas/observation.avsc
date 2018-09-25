@@ -1,0 +1,40 @@
+{
+    "type": "record",
+    "name": "Observation",
+    "namespace": "Resources",
+    "fields": [
+        {
+            "name": "identifier",
+            "type": {
+                "type": "array",
+                "items": {
+                    "type": "record",
+                    "name": "Identifier",
+                    "namespace": "Datatypes",
+                    "fields": [
+                        {
+                            "name": "use",
+                            "type": [
+                                "null",
+                                {
+                                    "type": "enum",
+                                    "name": "IdentifierUseCode",
+                                    "namespace": "Code",
+                                    "symbols": [
+                                        "INVALID_UNINITIALIZED",
+                                        "USUAL",
+                                        "OFFICIAL",
+                                        "TEMP",
+                                        "SECONDARY"
+                                    ],
+                                    "default": "INVALID_UNINITIALIZED"
+                                }
+                            ],
+                            "default": null
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -15,7 +15,7 @@ func main() {
 
 	//Sample Data
 	bundle := avro.Observation{}
-	fmt.Println(twitter_schema.Schema())
+	fmt.Println(bundle.Schema())
 
 	// Open a file to write
 	// fileWriter, err := os.Create("bundle.avro")

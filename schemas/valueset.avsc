@@ -1,0 +1,20 @@
+{
+    "type": "record",
+    "name": "IdentifierUse",
+    "namespace": "ValueSets",
+    "fields": [
+        {
+            "name": "value",
+            "namespace": "ValueSets.IdentifierUse",
+            "type": "enum",
+            "symbols": [
+                "INVALID_UNINITIALIZED",
+                "USUAL",
+                "OFFICIAL",
+                "TEMP",
+                "SECONDARY"
+            ],
+            "default": "INVALID_UNINITIALIZED"
+        }
+    ]
+}

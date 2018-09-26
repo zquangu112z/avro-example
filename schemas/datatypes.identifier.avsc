@@ -1,0 +1,16 @@
+{
+    "type": "record",
+    "name": "Identifier",
+    "namespace": "Datatypes",
+    "fields": [
+        {
+            "name": "use",
+            "namespace": "Datatypes.Identifier",
+            "type": [
+                "null",
+                "ValueSets.IdentifierUse"
+            ],
+            "default": null
+        }
+    ]
+}

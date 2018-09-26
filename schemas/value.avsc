@@ -1,0 +1,35 @@
+{
+    "type": "record",
+    "name": "Value",
+    "namespace": "Extension",
+    "fields": [
+        {
+            "name": "base64_binary",
+            "type": [
+                "null",
+                {
+                    "type": "record",
+                    "name": "Base64Binary",
+                    "namespace": "Extension.Datatypes",
+                    "fields": [
+                        {
+                            "name": "value",
+                            "type": "bytes",
+                            "default": ""
+                        },
+                        {
+                            "name": "id",
+                            "namespace": "Extension.Datatypes.Primitive",
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "default": null
+                        }
+                    ]
+                }
+            ],
+            "default": null
+        }
+    ]
+}

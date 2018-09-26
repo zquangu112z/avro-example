@@ -9,6 +9,10 @@
                 "type": "array",
                 "items": "Datatypes.Identifier"
             }
+        },
+        {
+            "name": "value",
+            "type": "Extension.Value"
         }
     ]
 }

@@ -14,7 +14,7 @@ var (
 func main() {
 
 	//Sample Data
-	bundle := avro.Observation{}
+	bundle := avro.Identifier{}
 	fmt.Println(bundle.Schema())
 
 	// Open a file to write

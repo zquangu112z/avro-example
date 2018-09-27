@@ -1,5 +1,8 @@
-@namespace("Resources")
-record Reference {
-    string reference;
-    string display;
+@namespace("abx.fhir")
+protocol FHIR {
+    @namespace("Resources")
+    record Reference {
+        string reference;
+        string display;
+    }
 }

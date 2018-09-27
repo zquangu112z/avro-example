@@ -1,0 +1,11 @@
+@namespace("abx.fhir")
+protocol FHIR {
+    @namespace("Datatypes")
+    record Coding {
+        string system;
+        string version;
+        string code;
+        string display;
+        boolean userSelected;
+    }
+}

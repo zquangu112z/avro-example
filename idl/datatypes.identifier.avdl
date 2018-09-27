@@ -1,28 +1,14 @@
 @namespace("abx.fhir")
 protocol FHIR {
-    @namespace("Datatypes")
-    record Period {
-        string start;
-        string end;
-    }
-
-    @namespace("ValueSets")
-    enum IdentifierUse {
-        USUAL,
-        OFFICIAL,
-        TEMP,
-        SECONDARY
-    }
-
-    @namespace("Resources")
-    record Reference {
-        string reference;
-        string display;
-    }
+    import idl "datatypes.period.avdl";
+    import idl "datatypes.codeableconcept.avdl";
+    import idl "resources.reference.avdl";
+    import idl "valuesets.avdl";
 
     @namespace("Datatypes")
     record Identifier {
         union { null, ValueSets.IdentifierUse } use;
+        Datatypes.CodeableConcept type;
         string system;
         string value;
         Datatypes.Period period;

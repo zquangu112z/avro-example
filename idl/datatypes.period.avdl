@@ -1,5 +1,8 @@
-@namespace("Datatypes")
-record Period {
-    string start;
-    string end;
+@namespace("abx.fhir")
+protocol FHIR {
+    @namespace("Datatypes")
+    record Period {
+        string start;
+        string end;
+    }
 }

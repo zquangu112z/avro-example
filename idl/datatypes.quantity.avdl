@@ -1,0 +1,11 @@
+@namespace("abx.fhir")
+protocol FHIR {
+    @namespace("Datatypes")
+    record Quantity {
+        float value;
+        string comparator;
+        string unit;
+        string system;
+        string code;
+    }
+}

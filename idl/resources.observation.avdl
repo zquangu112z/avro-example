@@ -1,14 +1,38 @@
+/*
+Description: https://www.hl7.org/fhir/observation.html 
+*/
 @namespace("abx.fhir")
 protocol FHIR {
     import idl "datatypes.identifier.avdl";
+    import idl "datatypes.period.avdl";
+    import idl "datatypes.quantity.avdl";
+    import idl "datatypes.range.avdl";
+    import idl "datatypes.ratio.avdl";
     import idl "resources.reference.avdl";
 
     @namespace("Resources")
     record Observation {
-        Datatypes.Identifier identifier;
-        Resources.Reference baseOn;
+        array<Datatypes.Identifier> identifier;
+        array<Resources.Reference> baseOn;
         string status;
         Datatypes.CodeableConcept category;
         Datatypes.CodeableConcept code;
+        Resources.Reference subject;
+        Resources.Reference context;
+        string effectiveDateTime;
+        Datatypes.Period effectivePeriod;
+        string issued;
+        Resources.Reference performer;
+        Datatypes.Quantity                valueQuantity;
+        Datatypes.CodeableConcept                valueCodeableConcept;
+        string                valueString;
+        string                valueBoolean;
+        Datatypes.Range             valueRange;
+          /*          Datatypes.Ratio valueRatio;
+                        valueSampledData;
+                        valueAttachment; */
+        string             valueTime;
+        string                valueDateTime;
+        Datatypes.Period                valuePeriod;
     }
 }

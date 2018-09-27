@@ -1,0 +1,10 @@
+@namespace("abx.fhir")
+protocol FHIR {
+    import idl "datatypes.quantity.avdl";
+
+    @namespace("Datatypes")
+    record Range {
+         Datatypes.Quantity low;
+         Datatypes.Quantity high;
+    }
+}

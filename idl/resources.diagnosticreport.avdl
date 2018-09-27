@@ -6,8 +6,8 @@ protocol FHIR {
 
     @namespace("Resources")
     record DiagnosticReport {
-        Datatypes.Identifier identifier;
-        Resources.Reference baseOn;
+        array<Datatypes.Identifier> identifier;
+        array<Resources.Reference> baseOn;
         string status;
         Datatypes.CodeableConcept category;
         Datatypes.CodeableConcept code;

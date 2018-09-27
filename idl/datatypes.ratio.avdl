@@ -1,0 +1,9 @@
+@namespace("abx.fhir")
+protocol FHIR {
+    import idl "datatypes.quantity.avdl";
+    @namespace("Datatypes")
+    record Ratio {
+         Datatypes.Quantity numerator;
+         Datatypes.Quantity denominator;
+    }
+}

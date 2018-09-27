@@ -1,0 +1,31 @@
+@namespace("abx.fhir")
+protocol FHIR {
+    @namespace("Datatypes")
+    record Period {
+        string start;
+        string end;
+    }
+
+    @namespace("ValueSets")
+    enum IdentifierUse {
+        USUAL,
+        OFFICIAL,
+        TEMP,
+        SECONDARY
+    }
+
+    @namespace("Resources")
+    record Reference {
+        string reference;
+        string display;
+    }
+
+    @namespace("Datatypes")
+    record Identifier {
+        union { null, ValueSets.IdentifierUse } use;
+        string system;
+        string value;
+        Datatypes.Period period;
+        Resources.Reference reference;
+    }
+}

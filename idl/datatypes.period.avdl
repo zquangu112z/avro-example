@@ -1,0 +1,5 @@
+@namespace("Datatypes")
+record Period {
+    string start;
+    string end;
+}

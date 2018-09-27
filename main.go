@@ -16,29 +16,65 @@ var (
 func main() {
 
 	//Sample Data
+	coding := avro.Coding{
+		System:       "okie",
+		Version:      "okie",
+		Code:         "okie",
+		Display:      "okie",
+		UserSelected: true,
+	}
+	// var coding_array []*avro.Coding
+	// coding_array = append(coding_array, &coding)
+	codeableConcept := avro.CodeableConcept{
+		Text:   "hihi",
+		Coding: []*avro.Coding{&coding},
+	}
+
+	reference := avro.Reference{
+		Reference: "ref1",
+		Display:   "Dis1",
+	}
+	period := avro.Period{
+		Start: "1",
+		End:   "2",
+	}
+
+	quantity := avro.Quantity{
+		Value:      6.9,
+		Comparator: "placeholader",
+		Unit:       "placeholader",
+		System:     "placeholader",
+		Code:       "placeholader",
+	}
+
+	arange := avro.Range{
+		Low:  &quantity,
+		High: &quantity,
+	}
+
 	observation := avro.Observation{
 		Identifier:           nil,
-		BaseOn:               nil,
+		BaseOn:               []*avro.Reference{&reference},
 		Status:               "fine",
-		Category:             nil,
-		Code:                 nil,
-		Subject:              nil,
-		Context:              nil,
+		Category:             &codeableConcept,
+		Code:                 &codeableConcept,
+		Subject:              &reference,
+		Context:              &reference,
 		EffectiveDateTime:    "today",
-		EffectivePeriod:      nil,
+		EffectivePeriod:      &period,
 		Issued:               "ABX",
-		Performer:            nil,
-		ValueQuantity:        nil,
-		ValueCodeableConcept: nil,
+		Performer:            &reference,
+		ValueQuantity:        &quantity,
+		ValueCodeableConcept: &codeableConcept,
 		ValueString:          "nil",
 		ValueBoolean:         "nil",
-		ValueRange:           nil,
+		ValueRange:           &arange,
 		ValueTime:            "nil",
 		ValueDateTime:        "nil",
-		ValuePeriod:          nil,
+		ValuePeriod:          &period,
 	}
+
 	// fmt.Println(observation.Schema())
-	fmt.Println("-----------")
 
 	// Open a file to write
 	fileWriter, err := os.Create("observation.avro")

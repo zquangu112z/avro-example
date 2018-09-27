@@ -1,0 +1,10 @@
+@namespace("abx.fhir")
+protocol FHIR {
+    import idl "resources.observation.avdl";
+    import idl "resources.diagnosticreport.avdl";
+
+    @namespace("main")
+    record Main {
+        union {Resources.Observation, Resources.DiagnosticReport} resource;
+    }
+}

@@ -1,0 +1,14 @@
+@namespace("abx.fhir")
+protocol FHIR {
+    import idl "datatypes.identifier.avdl";
+    import idl "resources.reference.avdl";
+
+    @namespace("Resources")
+    record Observation {
+        Datatypes.Identifier identifier;
+        Resources.Reference baseOn;
+        string status;
+        Datatypes.CodeableConcept category;
+        Datatypes.CodeableConcept code;
+    }
+}

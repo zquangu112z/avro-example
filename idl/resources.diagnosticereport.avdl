@@ -1,0 +1,17 @@
+@namespace("abx.fhir")
+protocol FHIR {
+    import idl "datatypes.identifier.avdl";
+    import idl "resources.reference.avdl";
+    import idl "datatypes.period.avdl";
+
+    @namespace("Resources")
+    record DiagnosticReport {
+        Datatypes.Identifier identifier;
+        Resources.Reference baseOn;
+        string status;
+        Datatypes.CodeableConcept category;
+        Datatypes.CodeableConcept code;
+        string effectiveDateTime;
+        Datatypes.Period effectivePeriod;
+    }
+}

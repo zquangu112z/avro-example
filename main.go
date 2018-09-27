@@ -14,8 +14,11 @@ var (
 func main() {
 
 	//Sample Data
-	bundle := avro.Identifier{}
-	fmt.Println(bundle.Schema())
+	observation := avro.Observation{}
+	fmt.Println(observation.Schema())
+
+	diagnosticReport := avro.DiagnosticReport{}
+	fmt.Println(diagnosticReport.Schema())
 
 	// Open a file to write
 	// fileWriter, err := os.Create("bundle.avro")

@@ -6,7 +6,7 @@ import (
 
 	"github.com/actgardner/gogen-avro/container"
 	"github.com/linkedin/goavro"
-	"github.com/zquangu112z/avro-example/avro"
+	avro "github.com/zquangu112z/avro-example/models"
 )
 
 var (
@@ -31,7 +31,7 @@ func main() {
 	}
 
 	reference := avro.Reference{
-		Reference: "ref111111",
+		Reference: "ref111",
 		Display:   "Dis1",
 	}
 	period := avro.Period{

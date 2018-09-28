@@ -10,16 +10,16 @@ MAIN_IDL=./schema-avdl/main.avdl
 MAIN_AVRO=$(JAVRO_OUTPUT)/Main.avsc 
 
 idl:
-	rm -f $(JAVRO_OUTPUT)/* && $(JAVRO) idl2schemata $(MAIN_IDL) $(JAVRO_OUTPUT)
+	rm -rf $(JAVRO_OUTPUT) && mkdir $(JAVRO_OUTPUT) && $(JAVRO) idl2schemata $(MAIN_IDL) $(JAVRO_OUTPUT)
 
 output:
-	rm -f $(GOGEN_OUTPUT)/* && mkdir $(GOGEN_OUTPUT) && $(GOGEN) $(GOGEN_PACKAGE) $(MAIN_AVRO) && $(SERIALIZE)
-
-test:
-	rm -f $(JAVRO_OUTPUT)/* && $(JAVRO) idl2schemata $(MAIN_IDL) $(JAVRO_OUTPUT) && rm -f $(GOGEN_OUTPUT)/* && mkdir $(GOGEN_OUTPUT) &&  $(GOGEN) $(MAIN_AVRO) $(MAIN_AVRO) && $(SERIALIZE)
-
-clean:
-	rm -f $(GOGEN_OUTPUT)/* && rm -f $(JAVRO_OUTPUT)/*
+	rm -rf $(GOGEN_OUTPUT) && mkdir $(GOGEN_OUTPUT) && $(GOGEN) $(GOGEN_PACKAGE) $(MAIN_AVRO) && $(SERIALIZE)
 
 tojson:
 	$(JAVRO) tojson observation.avro > obx.json
+
+test:
+	rm -rf $(JAVRO_OUTPUT) && mkdir $(JAVRO_OUTPUT) && $(JAVRO) idl2schemata $(MAIN_IDL) $(JAVRO_OUTPUT) &&rm -rf $(GOGEN_OUTPUT) && mkdir $(GOGEN_OUTPUT) && $(GOGEN) $(GOGEN_PACKAGE) $(MAIN_AVRO) && $(SERIALIZE) && $(JAVRO) tojson observation.avro > obx.json
+
+clean:
+	rm -rf $(GOGEN_OUTPUT) && rm -rf $(JAVRO_OUTPUT)

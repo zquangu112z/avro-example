@@ -184,7 +184,7 @@
         "name" : "valuePeriod",
         "type" : "Datatypes.Period"
       } ]
-    }, {
+    }, "Resources.Reference", {
       "type" : "record",
       "name" : "DiagnosticReport",
       "namespace" : "Resources",

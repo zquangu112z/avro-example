@@ -1,0 +1,10 @@
+@namespace("abx.fhir")
+protocol FHIR {
+    @namespace("ValueSets")
+    enum AdministrativeGender {
+        AdministrativeGender_MALE,
+        AdministrativeGender_FEMALE,
+        AdministrativeGender_OTHER,
+        AdministrativeGender_UNKNOWN
+    }
+}

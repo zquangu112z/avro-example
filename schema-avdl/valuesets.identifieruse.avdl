@@ -1,0 +1,10 @@
+@namespace("abx.fhir")
+protocol FHIR {
+    @namespace("ValueSets")
+    enum IdentifierUse {
+        IdentifierUse_USUAL,
+        IdentifierUse_OFFICIAL,
+        IdentifierUse_TEMP,
+        IdentifierUse_SECONDARY
+    }
+}

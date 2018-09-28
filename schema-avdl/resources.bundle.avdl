@@ -1,0 +1,18 @@
+/*
+Description: https://www.hl7.org/fhir/patient.html
+*/
+@namespace("abx.fhir")
+protocol FHIR {
+    import idl "datatypes.identifier.avdl";
+    import idl "elements.bundlelink.avdl";
+    import idl "elements.bundleentry.avdl";
+
+    @namespace("Resources")
+    record Bundle {
+        array<Datatypes.Identifier> identifier;
+        string type; /*@TODO: https://www.hl7.org/fhir/valueset-bundle-type.html*/
+        int total;
+        array<Elements.BundleLink> link;
+        array<Elements.BundleEntry> entry;
+    }
+}

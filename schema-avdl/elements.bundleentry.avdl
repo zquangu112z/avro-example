@@ -1,0 +1,17 @@
+/*
+Description: https://www.hl7.org/fhir/bundle-definitions.html#Bundle.link
+*/
+@namespace("abx.fhir")
+protocol FHIR {
+    import idl "elements.bundlelink.avdl";
+    import idl "resources.observation.avdl";
+    import idl "resources.patient.avdl";
+    import idl "resources.diagnosticreport.avdl";
+
+    @namespace("Elements")
+    record BundleEntry {
+        array<Elements.BundleLink> link;
+        string fullUrl;
+        union {Resources.Observation,  Resources.Patient, Resources.DiagnosticReport} resource;
+    }
+}

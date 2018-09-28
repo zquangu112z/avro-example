@@ -1,0 +1,11 @@
+/*
+Description: https://www.hl7.org/fhir/bundle-definitions.html#Bundle.link
+*/
+@namespace("abx.fhir")
+protocol FHIR {
+    @namespace("Elements")
+    record BundleLink {
+        string relation;
+        string uri;
+    }
+}

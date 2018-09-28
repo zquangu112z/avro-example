@@ -3,7 +3,7 @@ protocol FHIR {
     import idl "datatypes.period.avdl";
     import idl "datatypes.codeableconcept.avdl";
     import idl "resources.reference.avdl";
-    import idl "valuesets.avdl";
+    import idl "valuesets.identifieruse.avdl";
 
     @namespace("Datatypes")
     record Identifier {

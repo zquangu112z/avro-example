@@ -1,11 +1,12 @@
 @namespace("abx.fhir")
 protocol FHIR {
+    import idl "resources.bundle.avdl";
     import idl "resources.observation.avdl";
-    import idl "resources.reference.avdl";
+    import idl "resources.patient.avdl";
     import idl "resources.diagnosticreport.avdl";
 
     @namespace("main")
     record Main {
-        union {Resources.Observation, Resources.Reference, Resources.DiagnosticReport} resource;
+        union {Resources.Bundle, Resources.Observation,  Resources.Patient, Resources.DiagnosticReport} resource;
     }
 }

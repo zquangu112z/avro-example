@@ -31,7 +31,7 @@ func main() {
 	}
 
 	reference := avro.Reference{
-		Reference: "ref1",
+		Reference: "ref111111",
 		Display:   "Dis1",
 	}
 	period := avro.Period{

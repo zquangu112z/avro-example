@@ -1,0 +1,34 @@
+{
+  "type" : "record",
+  "name" : "CodeableConcept",
+  "namespace" : "Datatypes",
+  "fields" : [ {
+    "name" : "text",
+    "type" : "string"
+  }, {
+    "name" : "coding",
+    "type" : {
+      "type" : "array",
+      "items" : {
+        "type" : "record",
+        "name" : "Coding",
+        "fields" : [ {
+          "name" : "system",
+          "type" : "string"
+        }, {
+          "name" : "version",
+          "type" : "string"
+        }, {
+          "name" : "code",
+          "type" : "string"
+        }, {
+          "name" : "display",
+          "type" : "string"
+        }, {
+          "name" : "userSelected",
+          "type" : "boolean"
+        } ]
+      }
+    }
+  } ]
+}

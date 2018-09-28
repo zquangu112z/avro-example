@@ -1,0 +1,12 @@
+{
+  "type" : "record",
+  "name" : "Period",
+  "namespace" : "Datatypes",
+  "fields" : [ {
+    "name" : "start",
+    "type" : "string"
+  }, {
+    "name" : "end",
+    "type" : "string"
+  } ]
+}

@@ -1,0 +1,31 @@
+{
+  "type" : "record",
+  "name" : "Range",
+  "namespace" : "Datatypes",
+  "fields" : [ {
+    "name" : "low",
+    "type" : {
+      "type" : "record",
+      "name" : "Quantity",
+      "fields" : [ {
+        "name" : "value",
+        "type" : "float"
+      }, {
+        "name" : "comparator",
+        "type" : "string"
+      }, {
+        "name" : "unit",
+        "type" : "string"
+      }, {
+        "name" : "system",
+        "type" : "string"
+      }, {
+        "name" : "code",
+        "type" : "string"
+      } ]
+    }
+  }, {
+    "name" : "high",
+    "type" : "Quantity"
+  } ]
+}

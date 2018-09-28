@@ -1,0 +1,6 @@
+{
+  "type" : "enum",
+  "name" : "IdentifierUse",
+  "namespace" : "ValueSets",
+  "symbols" : [ "USUAL", "OFFICIAL", "TEMP", "SECONDARY" ]
+}

@@ -1,0 +1,21 @@
+{
+  "type" : "record",
+  "name" : "Quantity",
+  "namespace" : "Datatypes",
+  "fields" : [ {
+    "name" : "value",
+    "type" : "float"
+  }, {
+    "name" : "comparator",
+    "type" : "string"
+  }, {
+    "name" : "unit",
+    "type" : "string"
+  }, {
+    "name" : "system",
+    "type" : "string"
+  }, {
+    "name" : "code",
+    "type" : "string"
+  } ]
+}

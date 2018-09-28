@@ -1,0 +1,21 @@
+{
+  "type" : "record",
+  "name" : "Coding",
+  "namespace" : "Datatypes",
+  "fields" : [ {
+    "name" : "system",
+    "type" : "string"
+  }, {
+    "name" : "version",
+    "type" : "string"
+  }, {
+    "name" : "code",
+    "type" : "string"
+  }, {
+    "name" : "display",
+    "type" : "string"
+  }, {
+    "name" : "userSelected",
+    "type" : "boolean"
+  } ]
+}

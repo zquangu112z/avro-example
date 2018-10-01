@@ -22,9 +22,15 @@
   revision = "9e3ffbc22b459192a7090bfd06433b24be086370"
   version = "v2.6.0"
 
+[[projects]]
+  branch = "master"
+  name = "github.com/zquangu112z/hl7-parser"
+  packages = ["."]
+  revision = "6ca5ab5ce3838d87bdeca040b0a282103e162d1f"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "9e685cf6f9a425456d46b1b7c73b96256e3c634d51cda9115be88a025e3a261e"
+  inputs-digest = "98eb539d5db8de44af5d0f62224709138b6c413e3d634f701a536f6d459567b5"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -57,18 +57,20 @@ func convertToFhirBundle(message []byte) (*avro.Bundle, error) {
 	mshSegment := Hl7Message[0] // NOTE: hereby, assume the first segment is a MSH segment
 	createMessageHeader(mshSegment, messageHeader)
 
-	messageHeaderBundleEntry := &avro.BundleEntry{
-		Resource: avro.UnionObservationPatientMessageHeaderDiagnosticReport{
-			MessageHeader: messageHeader,
-		},
+	messageHeaderBundleEntry := avro.NewBundleEntry()
+	messageHeaderBundleEntryResource := avro.UnionObservationPatientMessageHeaderDiagnosticReport{
+		MessageHeader: messageHeader,
+		UnionType:     avro.UnionObservationPatientMessageHeaderDiagnosticReportTypeEnumMessageHeader,
 	}
+	(*messageHeaderBundleEntry).Resource = messageHeaderBundleEntryResource
+
 	// MessageHeader is the first entry in the bundle: http://www.hl7.org/implement/standards/fhir/messageheader.html
 	(*bundle).Entry = append((*bundle).Entry, messageHeaderBundleEntry)
 
 	generalDataDict := make(map[string]string)
 
 	for _, segment := range Hl7Message[1:] {
-		segmentName, _ := segment.AtIndex("0.0.0.0")
+		segmentName := segment.AtIndex("0.0.0.0")
 		switch segmentName {
 		case "OBX": // Found Observation
 			// Parse OBX data
@@ -77,34 +79,48 @@ func convertToFhirBundle(message []byte) (*avro.Bundle, error) {
 				path := tuple[0]
 				key := tuple[1]
 
-				obxDict[key], _ = segment.AtIndex(strings.SplitN(path, ".", 2)[1])
+				obxDict[key] = segment.AtIndex(strings.SplitN(path, ".", 2)[1])
 			}
 			// >>> Patient
-			patient := &avro.Patient{
-				Identifier: []*avro.Identifier{&avro.Identifier{
-					Value: generalDataDict["Patient.Identifier.Value"],
-				}},
-				Name: []*avro.HumanName{&avro.HumanName{
-					Given:  generalDataDict["Patient.HumanName.Given"],
-					Family: generalDataDict["Patient.HumanName.Family"],
-				}},
+			patient := avro.NewPatient()
+
+			patientIdentifiers := []*avro.Identifier{}
+			// only get 1 Identifier
+			patientIdentifier := avro.NewIdentifier()
+			patientIdentifier.Value = generalDataDict["Patient.Identifier.Value"]
+
+			patientIdentifiers = append(patientIdentifiers, patientIdentifier)
+
+			patientNames := []*avro.HumanName{}
+			// only get 1 HumanName
+			patientName := avro.NewHumanName()
+			patientName.Given = generalDataDict["Patient.HumanName.Given"]
+			patientName.Family = generalDataDict["Patient.HumanName.Family"]
+
+			patientNames = append(patientNames, patientName)
+
+			patient.Identifier = patientIdentifiers
+			patient.Name = patientNames
+
+			// @TODO: Send/Check if exist patient
+			writePatient(patient)
+
+			observation := avro.NewObservation()
+			observation.Issued = obxDict["Observation.Issued"]
+			observation.Subject = &avro.Reference{
+				Reference: (*patient).Identifier[0].Value,
+				Display:   (*patient).Identifier[0].Value,
 			}
 
-			observation := avro.Observation{
-				Issued: obxDict["Observation.Issued"],
-				Subject: &avro.Reference{
-					Reference: (*patient).Identifier[0].Value,
-				},
+			observationBundleEntry := avro.NewBundleEntry()
+			observationBundleEntryResource := avro.UnionObservationPatientMessageHeaderDiagnosticReport{
+				Observation: observation,
+				UnionType:   avro.UnionObservationPatientMessageHeaderDiagnosticReportTypeEnumObservation,
 			}
-
-			observationHeaderBundleEntry := &avro.BundleEntry{
-				Resource: avro.UnionObservationPatientMessageHeaderDiagnosticReport{
-					Observation: &observation,
-				},
-			}
+			observationBundleEntry.Resource = observationBundleEntryResource
 
 			// Add to bundle
-			(*bundle).Entry = append((*bundle).Entry, observationHeaderBundleEntry)
+			(*bundle).Entry = append((*bundle).Entry, observationBundleEntry)
 
 		default:
 			for _, generalName := range generalNames {
@@ -128,7 +144,7 @@ func updateGeneralDict(segment hl7.Hl7Segment, segmentName string, generalDataDi
 		}
 		key := tuple[1]
 		actualPath := strings.SplitN(path, ".", 2)[1]
-		data, _ := segment.AtIndex(actualPath)
+		data := segment.AtIndex(actualPath)
 		generalDataDict[key] = data
 	}
 }
@@ -154,7 +170,7 @@ func writeBundle(bundle *avro.Bundle) {
 		return
 	}
 
-	containerWriter, err := avro.NewObservationWriter(fileWriter, container.Null, 10)
+	containerWriter, err := avro.NewBundleWriter(fileWriter, container.Null, 10)
 	if err != nil {
 		fmt.Printf("Error opening container writer: %v\n", err)
 		return
@@ -177,28 +193,59 @@ func writeBundle(bundle *avro.Bundle) {
 	fileWriter.Close()
 }
 
-func createMessageHeader(mshSegment hl7.Hl7Segment, messageHeader *avro.MessageHeader) error {
-	event := avro.Coding{
-		Code:    "observation-provide", // string(mshSegment[8][0][1][0]),
-		Display: "observation-provide",
-		System:  "http://hl7.org/fhir/ValueSet/message-events",
+func writePatient(patient *avro.Patient) {
+	// Open a file to write
+	fileWriter, err := os.Create("patient.avro")
+	if err != nil {
+		fmt.Printf("Error opening file writer: %v\n", err)
+		return
 	}
-	(*messageHeader).Event = &event
 
-	messageHeaderDestination := avro.MessageHeaderDestination{
-		Name:     string(mshSegment[4][0][0][0]),
-		Endpoint: string(mshSegment[24][0][0][0]),
+	containerWriter, err := avro.NewPatientWriter(fileWriter, container.Null, 10)
+	if err != nil {
+		fmt.Printf("Error opening container writer: %v\n", err)
+		return
 	}
-	(*messageHeader).Destination = &messageHeaderDestination
+
+	// Write the record to the container file
+	err = containerWriter.WriteRecord(patient)
+	if err != nil {
+		fmt.Printf("Error writing record to file: %v\n", err)
+		return
+	}
+
+	// Flush the buffers to ensure the last block has been written
+	err = containerWriter.Flush()
+	if err != nil {
+		fmt.Printf("Error flushing last block to file: %v\n", err)
+		return
+	}
+
+	fileWriter.Close()
+}
+
+func createMessageHeader(mshSegment hl7.Hl7Segment, messageHeader *avro.MessageHeader) error {
+	event := avro.NewCoding()
+	(*event).Code = "observation-provide" // string(mshSegment[8][0][1][0]),
+	(*event).Display = "observation-provide"
+	(*event).System = "http://hl7.org/fhir/ValueSet/message-events"
+
+	(*messageHeader).Event = event
+
+	messageHeaderDestination := avro.NewMessageHeaderDestination()
+	(*messageHeaderDestination).Name = string(mshSegment[4][0][0][0])
+	(*messageHeaderDestination).Endpoint = string(mshSegment[24][0][0][0])
+
+	(*messageHeader).Destination = messageHeaderDestination
 
 	(*messageHeader).Timestamp = string(mshSegment[6][0][0][0])
 
-	messageHeaderSource := avro.MessageHeaderSource{
-		Name:     string(mshSegment[2][0][0][0]),
-		Software: string(mshSegment[2][0][0][0]),
-		Endpoint: string(mshSegment[23][0][0][0]),
-	}
-	(*messageHeader).Source = &messageHeaderSource
+	messageHeaderSource := avro.NewMessageHeaderSource()
+	(*messageHeaderSource).Name = string(mshSegment[2][0][0][0])
+	(*messageHeaderSource).Software = string(mshSegment[2][0][0][0])
+	(*messageHeaderSource).Endpoint = string(mshSegment[23][0][0][0])
+
+	(*messageHeader).Source = messageHeaderSource
 
 	return nil
 }

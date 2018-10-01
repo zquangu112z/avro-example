@@ -23,3 +23,6 @@ test:
 
 clean:
 	rm -rf $(GOGEN_OUTPUT) && rm -rf $(JAVRO_OUTPUT)
+
+parser:
+	go run examples/bundle_hl7_oru/main.go

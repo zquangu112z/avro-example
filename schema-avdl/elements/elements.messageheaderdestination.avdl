@@ -1,0 +1,15 @@
+/*
+Description: https://www.hl7.org/fhir/messageheader-definitions.html#MessageHeader.destination
+Status: FINAL
+*/
+@namespace("abx.fhir")
+protocol FHIR {
+    import idl "../resources/resources.reference.avdl";
+
+    @namespace("Elements")
+    record MessageHeaderDestination {
+        string name;
+        Resources.Reference target;
+        string endpoint;
+    }
+}

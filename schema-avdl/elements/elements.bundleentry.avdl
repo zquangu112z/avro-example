@@ -4,9 +4,9 @@ Description: https://www.hl7.org/fhir/bundle-definitions.html#Bundle.link
 @namespace("abx.fhir")
 protocol FHIR {
     import idl "elements.bundlelink.avdl";
-    import idl "resources.observation.avdl";
-    import idl "resources.patient.avdl";
-    import idl "resources.diagnosticreport.avdl";
+    import idl "../resources/resources.observation.avdl";
+    import idl "../resources/resources.patient.avdl";
+    import idl "../resources/resources.diagnosticreport.avdl";
 
     @namespace("Elements")
     record BundleEntry {

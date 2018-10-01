@@ -1,3 +1,8 @@
+/*
+Description: https://www.hl7.org/fhir/valueset-name-use.html
+Status: FINAL
+*/
+
 @namespace("abx.fhir")
 protocol FHIR {
     @namespace("ValueSets")

@@ -1,9 +1,9 @@
 @namespace("abx.fhir")
 protocol FHIR {
-    import idl "datatypes.period.avdl";
-    import idl "datatypes.codeableconcept.avdl";
-    import idl "resources.reference.avdl";
-    import idl "valuesets.identifieruse.avdl";
+    import idl "../datatypes/datatypes.period.avdl";
+    import idl "../datatypes/datatypes.codeableconcept.avdl";
+    import idl "../resources/resources.reference.avdl";
+    import idl "../valuesets/valuesets.identifieruse.avdl";
 
     @namespace("Datatypes")
     record Identifier {

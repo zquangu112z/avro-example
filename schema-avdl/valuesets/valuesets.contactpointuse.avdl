@@ -1,0 +1,16 @@
+/*
+Description: https://www.hl7.org/fhir/valueset-contact-point-use.html
+Status: FINAL
+*/
+
+@namespace("abx.fhir")
+protocol FHIR {
+    @namespace("ValueSets")
+    enum ContactPointUse {
+        ContactPointUse_HOME,
+        ContactPointUse_WORK,
+        ContactPointUse_TEMP,
+        ContactPointUse_OLD,
+        ContactPointUse_MOBILE
+    }
+}

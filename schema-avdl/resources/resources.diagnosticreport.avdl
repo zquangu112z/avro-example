@@ -1,8 +1,8 @@
 @namespace("abx.fhir")
 protocol FHIR {
-    import idl "datatypes.identifier.avdl";
-    import idl "resources.reference.avdl";
-    import idl "datatypes.period.avdl";
+    import idl "../datatypes/datatypes.identifier.avdl";
+    import idl "../resources/resources.reference.avdl";
+    import idl "../datatypes/datatypes.period.avdl";
 
     @namespace("Resources")
     record DiagnosticReport {

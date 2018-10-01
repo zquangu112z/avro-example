@@ -1,6 +1,6 @@
 @namespace("abx.fhir")
 protocol FHIR {
-    import idl "datatypes.coding.avdl";
+    import idl "../datatypes/datatypes.coding.avdl";
     @namespace("Datatypes")
     record CodeableConcept {
         string text;

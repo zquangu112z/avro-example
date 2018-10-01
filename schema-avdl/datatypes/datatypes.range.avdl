@@ -1,6 +1,6 @@
 @namespace("abx.fhir")
 protocol FHIR {
-    import idl "datatypes.quantity.avdl";
+    import idl "../datatypes/datatypes.quantity.avdl";
 
     @namespace("Datatypes")
     record Range {

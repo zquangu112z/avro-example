@@ -1,4 +1,4 @@
-JAVRO=java -jar /Users/kilia/Downloads/avro-tools-1.8.2.jar
+JAVRO=java -jar ~/Downloads/avro-tools-1.8.2.jar
 JAVRO_OUTPUT=./schema-avro
 GOGEN=gogen-avro -containers 
 GOGEN_OUTPUT=./models
@@ -23,3 +23,6 @@ test:
 
 clean:
 	rm -rf $(GOGEN_OUTPUT) && rm -rf $(JAVRO_OUTPUT)
+
+parser:
+	go run examples/bundle_hl7_oru/*.go

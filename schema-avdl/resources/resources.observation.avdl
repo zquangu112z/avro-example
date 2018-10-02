@@ -3,12 +3,12 @@ Description: https://www.hl7.org/fhir/observation.html
 */
 @namespace("abx.fhir")
 protocol FHIR {
-    import idl "datatypes.identifier.avdl";
-    import idl "datatypes.period.avdl";
-    import idl "datatypes.quantity.avdl";
-    import idl "datatypes.range.avdl";
-    import idl "datatypes.ratio.avdl";
-    import idl "resources.reference.avdl";
+    import idl "../datatypes/datatypes.identifier.avdl";
+    import idl "../datatypes/datatypes.period.avdl";
+    import idl "../datatypes/datatypes.quantity.avdl";
+    import idl "../datatypes/datatypes.range.avdl";
+    import idl "../datatypes/datatypes.ratio.avdl";
+    import idl "../resources/resources.reference.avdl";
 
     @namespace("Resources")
     record Observation {

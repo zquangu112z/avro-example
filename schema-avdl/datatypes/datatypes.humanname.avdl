@@ -1,8 +1,8 @@
 @namespace("abx.fhir")
 protocol FHIR {
-    import idl "datatypes.period.avdl";
-    import idl "datatypes.codeableconcept.avdl";
-    import idl "valuesets.nameuse.avdl";
+    import idl "../datatypes/datatypes.period.avdl";
+    import idl "../datatypes/datatypes.codeableconcept.avdl";
+    import idl "../valuesets/valuesets.nameuse.avdl";
 
     @namespace("Datatypes")
     record HumanName {

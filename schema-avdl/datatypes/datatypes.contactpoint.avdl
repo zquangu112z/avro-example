@@ -1,0 +1,21 @@
+/*
+Description: https://www.hl7.org/fhir/datatypes.html#ContactPoint
+Status: FINAL
+*/
+
+@namespace("abx.fhir")
+protocol FHIR {
+    import idl "../datatypes/datatypes.quantity.avdl";
+    import idl "../datatypes/datatypes.period.avdl";
+    import idl "../valuesets/valuesets.contactpointsystem.avdl";
+    import idl "../valuesets/valuesets.contactpointuse.avdl";
+
+    @namespace("Datatypes")
+    record ContactPoint {
+        ValueSets.ContactPointSystem system;
+        string value;
+        ValueSets.ContactPointUse use;
+        int rank;
+        Datatypes.Period period;
+    }
+}

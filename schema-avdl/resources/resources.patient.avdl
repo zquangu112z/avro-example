@@ -1,0 +1,23 @@
+/*
+Description: https://www.hl7.org/fhir/patient.html
+*/
+@namespace("abx.fhir")
+protocol FHIR {
+    import idl "../datatypes/datatypes.identifier.avdl";
+    import idl "../valuesets/valuesets.administrativegender.avdl";
+
+    import idl "../datatypes/datatypes.period.avdl";
+    import idl "../datatypes/datatypes.quantity.avdl";
+    import idl "../datatypes/datatypes.humanname.avdl";
+    import idl "../datatypes/datatypes.range.avdl";
+    import idl "../datatypes/datatypes.ratio.avdl";
+    import idl "../resources/resources.reference.avdl";
+
+    @namespace("Resources")
+    record Patient {
+        array<Datatypes.Identifier> identifier;
+        boolean active;
+        array<Datatypes.HumanName> name;
+        ValueSets.AdministrativeGender gender;
+    }
+}

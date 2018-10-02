@@ -1,0 +1,17 @@
+/*
+Description: https://www.hl7.org/fhir/messageheader.html
+*/
+@namespace("abx.fhir")
+protocol FHIR {
+    import idl "../datatypes/datatypes.coding.avdl";
+    import idl "../elements/elements.messageheaderdestination.avdl";
+    import idl "../elements/elements.messageheadersource.avdl";
+
+    @namespace("Resources")
+    record MessageHeader {
+        Datatypes.Coding event;
+        Elements.MessageHeaderDestination destination;
+        string timestamp;
+        Elements.MessageHeaderSource source;
+    }
+}

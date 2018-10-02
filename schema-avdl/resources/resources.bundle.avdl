@@ -3,9 +3,9 @@ Description: https://www.hl7.org/fhir/patient.html
 */
 @namespace("abx.fhir")
 protocol FHIR {
-    import idl "datatypes.identifier.avdl";
-    import idl "elements.bundlelink.avdl";
-    import idl "elements.bundleentry.avdl";
+    import idl "../datatypes/datatypes.identifier.avdl";
+    import idl "../elements/elements.bundlelink.avdl";
+    import idl "../elements/elements.bundleentry.avdl";
 
     @namespace("Resources")
     record Bundle {

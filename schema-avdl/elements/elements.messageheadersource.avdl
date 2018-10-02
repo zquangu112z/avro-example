@@ -1,0 +1,17 @@
+/*
+Description: https://www.hl7.org/fhir/messageheader-definitions.html#MessageHeader.source
+Status: FINAL
+*/
+
+@namespace("abx.fhir")
+protocol FHIR {
+    import idl "../datatypes/datatypes.contactpoint.avdl";
+    @namespace("Elements")
+    record MessageHeaderSource {
+        string name;
+        string software;
+        string version;
+        Datatypes.ContactPoint contact;
+        string endpoint;
+    }
+}

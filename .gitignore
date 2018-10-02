@@ -1,3 +1,7 @@
 /schema-avro
 models
 /vendor
+/bundle.avro
+/bundle.json
+/patient.avro
+/patient.json
